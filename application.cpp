@@ -3,8 +3,9 @@
 
 Application::Application(std::string appString){
   //IMPLEMENT_ME();
-  tasks = new PriorityQueue(nullptr, 0);
+  tasks = new PriorityQueue();
   std::string temp = "";
+  size = 0;
   int caseVal = 0;
   for(int i = 0; i < appString.length(); i++){
     if(appString[i] == ' '){
@@ -19,17 +20,15 @@ Application::Application(std::string appString){
           caseVal++;
           temp = "";
           break;
-        case 2:
-          temp = temp + appString[i];
-          break;
       }
 
     }
     else if(appString[i] == ')'){
       temp = temp + appString[i];
       Task* newTask = new Task(temp);
-      PriorityQueue* newQueue = new PriorityQueue(newTask, 1);
-      tasks->concat(newQueue);
+      tasks->addElem(newTask);
+      size++;
+      temp = "";
     }
     else{
       temp = temp + appString[i];
@@ -45,7 +44,7 @@ Application::Application(int i,
   //IMPLEMENT_ME();
   id = i;
   name = appName;
-  tasks = new PriorityQueue(ts, size);
+  tasks = new PriorityQueue(ts, ts->getTtl());
   this->size = size;
 }
 

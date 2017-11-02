@@ -12,6 +12,8 @@ FILES=Makefile priority-queue.hpp priority-queue.cpp \
 s	scheduler.cpp scheduler.hpp \
 	simulator.cpp \
 	util.hpp \
+	queue.hpp \
+	queue.cpp \
 	data.txt exp-output-data.txt \
 	$(STUDENT_ID)-$(LAB_NAME)-writeup.pdf \
 	$(STUDENT_ID)-$(LAB_NAME)-report.pdf
@@ -21,9 +23,10 @@ ARCHIVE_FOLDER=$(STUDENT_ID)-$(LAB_NAME)
 install: build
 	$(GCC) $(GCCFLAGS) -o simulator simulator.o \
 		task.o application.o \
-		priority-queue.o scheduler.o 
+		priority-queue.o scheduler.o \
+		queue.o
 
-build: task application simulator priority-queue scheduler
+build: task application simulator priority-queue scheduler queue
 	@echo "Please use -- make install -- to build executables"
 test:
 	./simulator
@@ -42,6 +45,9 @@ simulator:
 
 scheduler:
 	$(GCC) $(GCCFLAGS) -c scheduler.cpp -o scheduler.o
+
+queue:
+	$(GCC) $(GCCFLAGS) -c queue.cpp -o queue.o
 
 clean:
 	rm -rf simulator \

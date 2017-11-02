@@ -9,5 +9,14 @@
 
 int dummy(int a, int b);
 
+int print(Task* root){
+  std::cout << root->getTid() << "(" << root->getAppId() << ")" << " ";
+  return 0;
+}
+
+int deleteHelper(Task* root){
+  delete root;
+  return 0;
+}
 
 #endif //UTIL_HPP defined

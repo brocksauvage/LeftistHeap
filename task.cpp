@@ -1,5 +1,5 @@
 #include "task.hpp"
-#include "util.hpp"
+
 
 Task::Task(int id, int p, int aid, int t): tid(id), nice(p), appId(aid), ttl(t) {
   left = nullptr;
@@ -11,43 +11,60 @@ Task::Task(std::string task){
   int iterator = 0;
   left = nullptr;
   right = nullptr;
+  std::string temp = "";
   for(int i = 0; i < task.size(); i++){
-    if(task[i] != '(' && task[i] != ')' && task[i] != ' ' && task[i] != ',')
+    if(task[i] == ',')
     {
       switch(iterator){
         case 0:
-          tid = atoi(&task[i]);
+          tid = stoi(temp);
           break;
         case 1:
-          nice = atoi(&task[i]);
+          nice = stoi(temp);
           break;
         case 2:
-          appId = atoi(&task[i]);
+          appId = stoi(temp);
           break;
         case 3:
-          ttl = atoi(&task[i]);
+          ttl = stoi(temp);
           break;
       }
         iterator++;
+        temp = "";
+    }
+    else if(task[i] != '(' && task[i] != ')' && task[i] != ' '){
+      temp = temp+task[i];
     }
   }
   rank = 0;
 }
 
 int Task::getTid() {
-  return this->tid;
+  if(this != nullptr){
+    return this->tid;
+  }
+  return -1;
 }
 
 int Task::getNice() {
-  return this->nice;
+  if(this != nullptr){
+    return this->nice;
+  }
+  return -1;
 }
 
 int Task::getAppId(){
-  return this->appId;
+  if(this != nullptr){
+    return this->appId;
+  }
+  return -1;
 }
 
 int Task::getTtl(){
-  return this->ttl;
+  if(this != nullptr){
+    return this->ttl;
+  }
+  return -1;
 }
 
 Task* Task::getLeft(){
@@ -67,7 +84,10 @@ void Task::setRight(Task* right){
 }
 
 int Task::getRank(){
-  return this->rank;
+  if(this != nullptr){
+    return this->rank;
+  }
+  return -1;
 }
 
 void Task::setRank(int rank){
@@ -75,7 +95,10 @@ void Task::setRank(int rank){
 }
 
 int Task::getSize(){
-  return this->size;
+  if(this != nullptr){
+    return this->size;
+  }
+  return -1;
 }
 
 void Task::setSize(int size){

@@ -2,6 +2,7 @@
 #define PRIORITY_QUEUE_HPP
 
 #include "task.hpp"
+#include "queue.hpp"
 
 /////////////////////////////////////////////////////////////////
 // You may not add any public methods in this class            //
@@ -33,6 +34,12 @@ private:
   Task* merge(Task* h1, Task* h2);
 
   int computeRank(Task* task);
+
+  Task* getRoot();
+
+  int getSize();
+
+  Task* postOrderHelper(Task* root, int identity, int (*op)(Task*));
 
 public:
   //Member functions
@@ -88,10 +95,6 @@ public:
    * the priority queue and applies the operation *op on each of the elements.
    */
   int postorderTraversal(int identity, int (*op)(Task*));
-
-  Task* getRoot();
-
-  int getSize();
 
 };
 

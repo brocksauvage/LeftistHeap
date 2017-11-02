@@ -18,6 +18,8 @@ class Scheduler {
 
   PriorityQueue* schedule;
 
+  int size;
+  
 public:
 
   /**
